@@ -137,11 +137,11 @@ export function Home() {
             </p>
           </div>
           {/* 4-Product Horizontal Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-surface-variant">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-surface-variant">
             {products.map((item) => (
               <div
                 key={item.id}
-                className="group border-r border-b border-surface-variant bg-surface-container-lowest p-6 flex flex-col justify-between hover:bg-surface-bright transition-all duration-300 relative cursor-pointer"
+                className="group border-r border-b border-surface-variant bg-surface-container-lowest p-3.5 sm:p-6 flex flex-col justify-between hover:bg-surface-bright transition-all duration-300 relative cursor-pointer"
                 onClick={() => setSelectedProduct({
                   title: item.title,
                   edition: item.tag,
@@ -152,11 +152,11 @@ export function Home() {
                 })}
               >
                 <div>
-                  <div className="flex justify-between items-start font-technical-data text-technical-data text-secondary mb-4">
+                  <div className="flex justify-between items-start font-technical-data text-[9px] sm:text-technical-data text-secondary mb-2 sm:mb-4">
                     <span>{item.type}</span>
                     <span className={item.tagColor}>{item.tag}</span>
                   </div>
-                  <div className="w-full aspect-square bg-surface-container-low mb-6 border border-surface-variant overflow-hidden relative">
+                  <div className="w-full aspect-square bg-surface-container-low mb-3 sm:mb-6 border border-surface-variant overflow-hidden relative">
                     <img
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       src={item.image}
@@ -165,20 +165,20 @@ export function Home() {
                       }}
                       alt={item.title}
                     />
-                    <div className="absolute inset-0 bg-inverse-surface/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="hidden sm:flex absolute inset-0 bg-inverse-surface/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
                       <span className="bg-surface px-4 py-2 font-label-uppercase text-label-uppercase tracking-widest text-on-surface border border-surface-variant">
                         Quick Inspect
                       </span>
                     </div>
                   </div>
-                  <h3 className="font-headline-md text-headline-md text-on-surface">{item.title}</h3>
-                  <p className="font-technical-data text-technical-data text-secondary mt-1">{item.calibre}</p>
+                  <h3 className="font-headline-md text-xs sm:text-headline-md text-on-surface line-clamp-1">{item.title}</h3>
+                  <p className="font-technical-data text-[10px] sm:text-technical-data text-secondary mt-1 line-clamp-1">{item.calibre}</p>
                 </div>
-                <div className="pt-6 mt-6 border-t border-surface-variant flex justify-between items-center">
-                  <span className="font-title-sm text-title-sm text-on-surface">
-                    {item.price} <span className="font-technical-data text-technical-data text-secondary">NGN</span>
+                <div className="pt-3 sm:pt-6 mt-3 sm:mt-6 border-t border-surface-variant flex justify-between items-center">
+                  <span className="font-title-sm text-xs sm:text-title-sm text-on-surface whitespace-nowrap">
+                    {item.price} <span className="font-technical-data text-[9px] sm:text-technical-data text-secondary">NGN</span>
                   </span>
-                  <span className="material-symbols-outlined text-secondary group-hover:text-primary transition-colors duration-200 text-sm">
+                  <span className="material-symbols-outlined text-secondary group-hover:text-primary transition-colors duration-200 text-xs sm:text-sm">
                     arrow_forward
                   </span>
                 </div>

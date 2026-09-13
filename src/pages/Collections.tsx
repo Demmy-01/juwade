@@ -529,7 +529,7 @@ export function Collections() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 md:gap-6">
                 {filteredProducts.map((item) => (
                   <article
                     key={item.id}
@@ -537,10 +537,10 @@ export function Collections() {
                     onClick={() => setSelectedProduct(item)}
                   >
                     <div className="relative w-full aspect-[4/5] bg-[#F6F3F2] overflow-hidden flex items-center justify-center">
-                      <span className="absolute top-3 left-3 font-technical-data text-technical-data tracking-widest text-secondary uppercase z-10 bg-surface-container-lowest/80 px-2 py-0.5 backdrop-blur-sm">
+                      <span className="absolute top-2 left-2 md:top-3 md:left-3 font-technical-data text-[9px] sm:text-technical-data tracking-widest text-secondary uppercase z-10 bg-surface-container-lowest/80 px-1.5 md:px-2 py-0.5 backdrop-blur-sm">
                         {item.edition}
                       </span>
-                      <span className="absolute top-3 right-3 font-technical-data text-technical-data tracking-widest text-primary font-semibold z-10 bg-surface-container-lowest/80 px-2 py-0.5 backdrop-blur-sm">
+                      <span className="absolute top-2 right-2 md:top-3 md:right-3 font-technical-data text-[9px] sm:text-technical-data tracking-widest text-primary font-semibold z-10 bg-surface-container-lowest/80 px-1.5 md:px-2 py-0.5 backdrop-blur-sm">
                         {item.tag}
                       </span>
 
@@ -565,7 +565,7 @@ export function Collections() {
                       />
 
                       {/* Quick Select Overlay Action */}
-                      <div className="absolute inset-x-4 bottom-4 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="hidden sm:block absolute inset-x-4 bottom-4 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                         <button
                           className="w-full h-11 bg-on-surface text-surface font-label-uppercase text-label-uppercase uppercase tracking-widest hover:bg-primary transition-colors flex items-center justify-center space-x-2"
                           type="button"
@@ -580,28 +580,28 @@ export function Collections() {
                       </div>
                     </div>
 
-                    <div className="p-5 border-t border-surface-variant flex flex-col justify-between flex-grow">
+                    <div className="p-3 md:p-5 border-t border-surface-variant flex flex-col justify-between flex-grow">
                       <div>
                         <div className="flex items-center justify-between">
-                          <span className="font-technical-data text-technical-data text-primary font-bold tracking-widest uppercase">
+                          <span className="font-technical-data text-[10px] sm:text-technical-data text-primary font-bold tracking-widest uppercase">
                             {item.brand}
                           </span>
-                          <span className="font-technical-data text-technical-data text-secondary tracking-widest uppercase">
+                          <span className="font-technical-data text-[10px] sm:text-technical-data text-secondary tracking-widest uppercase">
                             {item.caseSize}
                           </span>
                         </div>
-                        <h3 className="font-headline-md text-body-lg text-on-surface tracking-wider font-semibold uppercase mt-1">
+                        <h3 className="font-headline-md text-xs sm:text-body-lg text-on-surface tracking-wider font-semibold uppercase mt-1 line-clamp-1">
                           {item.title}
                         </h3>
-                        <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                        <p className="font-body-sm text-[11px] sm:text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">
                           {item.details}
                         </p>
                       </div>
-                      <div className="mt-4 pt-3 border-t border-surface-variant/40 flex items-center justify-between gap-3">
-                        <span className="font-headline-md text-body-md font-bold text-on-surface tracking-wider shrink-0 whitespace-nowrap">
+                      <div className="mt-2.5 md:mt-4 pt-2 md:pt-3 border-t border-surface-variant/40 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-3">
+                        <span className="font-headline-md text-xs sm:text-body-md font-bold text-on-surface tracking-wider shrink-0 whitespace-nowrap">
                           {item.priceFormatted}
                         </span>
-                        <span className="font-technical-data text-technical-data text-secondary tracking-widest uppercase text-right truncate">
+                        <span className="font-technical-data text-[9px] sm:text-technical-data text-secondary tracking-widest uppercase text-left sm:text-right truncate">
                           {item.caliber}
                         </span>
                       </div>
