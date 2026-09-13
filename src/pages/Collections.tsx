@@ -597,11 +597,11 @@ export function Collections() {
                           {item.details}
                         </p>
                       </div>
-                      <div className="mt-4 pt-3 border-t border-surface-variant/40 flex items-center justify-between">
-                        <span className="font-body-md text-body-md font-semibold text-on-surface tracking-wider">
+                      <div className="mt-4 pt-3 border-t border-surface-variant/40 flex items-center justify-between gap-3">
+                        <span className="font-headline-md text-body-md font-bold text-on-surface tracking-wider shrink-0 whitespace-nowrap">
                           {item.priceFormatted}
                         </span>
-                        <span className="font-technical-data text-technical-data text-secondary tracking-widest uppercase">
+                        <span className="font-technical-data text-technical-data text-secondary tracking-widest uppercase text-right truncate">
                           {item.caliber}
                         </span>
                       </div>
@@ -669,8 +669,8 @@ export function Collections() {
                   <div>DIAL FINISH: <span className="text-on-surface font-semibold">{selectedProduct.dialFinish}</span></div>
                   <div>CASE SIZE: <span className="text-on-surface font-semibold">{selectedProduct.caseSize}</span></div>
                 </div>
-                <div className="pt-4 border-t border-surface-variant flex items-center justify-between">
-                  <span className="font-title-sm text-title-sm text-on-surface font-bold">
+                <div className="pt-4 border-t border-surface-variant flex items-center justify-between gap-4">
+                  <span className="font-title-sm text-title-sm text-on-surface font-bold whitespace-nowrap shrink-0">
                     {selectedProduct.priceFormatted}
                   </span>
                   <button
