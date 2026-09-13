@@ -75,7 +75,7 @@ export function Home() {
                 NIGERIAN HOROLOGY • LIMITED EDITIONS
               </span>
             </div>
-            <h1 className="font-display-hero font-bold sm:font-semibold md:font-normal text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] xl:text-[3rem] text-on-surface leading-snug tracking-wide uppercase">
+            <h1 className="font-display-hero text-headline-xl md:text-display-hero text-on-surface leading-none tracking-widest uppercase font-normal">
               CRAFTING TIME FOR THE MODERN ERA
             </h1>
             <p className="font-body-lg text-body-lg text-secondary max-w-xl pt-2">

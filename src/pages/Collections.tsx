@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { SlidersHorizontal, X } from 'lucide-react';
 import { useDocumentTitle } from '@/hooks';
 
 interface Product {
@@ -44,6 +45,9 @@ export function Collections() {
 
   // Quick Inspect Modal State
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  // Mobile Filter Drawer State
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   const toggleAccordion = (key: string) => {
     setOpenAccordions((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -394,10 +398,10 @@ export function Collections() {
                   NIGERIAN HOROLOGY & ARCHITECTURE
                 </span>
               </div>
-              <h1 className="font-serif text-headline-xl md:text-display-hero text-on-surface tracking-widest leading-none uppercase font-normal">
+              <h1 className="font-display-hero text-headline-xl md:text-display-hero text-on-surface tracking-widest leading-none uppercase font-normal">
                 COLLECTIONS & EDITIONS
               </h1>
-              <p className="font-sans text-body-lg md:text-[1.25rem] text-on-surface-variant leading-relaxed pt-2">
+              <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed pt-2">
                 Engineered through rigorous chronometric disciplines and calibrated in our Lagos ateliers. Each monolithic dial is hand-finished with surgical precision, balanced between architectural discipline and timeless mechanical poetry.
               </p>
             </div>
@@ -420,12 +424,20 @@ export function Collections() {
       <main className="max-w-7xl mx-auto px-margin md:px-margin-desktop py-space-xl">
         {/* Top Horizontal Filter / Sort Controller */}
         <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between pb-8 mb-8 border-b border-surface-variant gap-4">
-          <div className="flex items-center space-x-6">
-            <span className="font-technical-data text-technical-data text-on-surface tracking-widest font-semibold flex items-center gap-2">
+          <div className="flex items-center space-x-4">
+            {/* Mobile Filter Toggle */}
+            <button
+              className="lg:hidden inline-flex items-center gap-2 font-technical-data text-technical-data text-on-surface tracking-widest font-semibold border border-surface-variant px-4 py-2 hover:border-primary transition-colors"
+              onClick={() => setIsMobileFilterOpen(true)}
+            >
+              <SlidersHorizontal size={14} />
+              FILTERS
+            </button>
+            <span className="hidden lg:inline-flex font-technical-data text-technical-data text-on-surface tracking-widest font-semibold items-center gap-2">
               <span className="material-symbols-outlined text-sm">tune</span> SPECIFICATION FILTERS
             </span>
             <button
-              className="font-technical-data text-[11px] uppercase tracking-widest text-secondary hover:text-primary transition-colors underline underline-offset-4 cursor-pointer"
+              className="font-technical-data text-technical-data uppercase tracking-widest text-secondary hover:text-primary transition-colors underline underline-offset-4 cursor-pointer"
               onClick={resetFilters}
             >
               Reset All
@@ -457,15 +469,15 @@ export function Collections() {
 
         {/* Asymmetric Workbench Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          {/* STICKY FILTER PANEL (3 Columns on Desktop) */}
-          <aside className="lg:col-span-3 space-y-6 lg:sticky lg:top-28">
+          {/* STICKY FILTER PANEL (3 Columns on Desktop, hidden on mobile) */}
+          <aside className="hidden lg:block lg:col-span-3 space-y-6 lg:sticky lg:top-28">
             {/* Accordion Item 1: Collection */}
             <div className="border border-surface-variant bg-surface-container-lowest p-5">
               <div
                 className="flex items-center justify-between cursor-pointer select-none"
                 onClick={() => toggleAccordion('collection')}
               >
-                <h2 className="font-serif text-body-md font-semibold text-on-surface tracking-wider">
+                <h2 className="font-headline-md text-body-md font-semibold text-on-surface tracking-wider">
                   01 // COLLECTION
                 </h2>
                 <span className="material-symbols-outlined text-secondary text-sm transition-transform duration-200">
@@ -493,7 +505,7 @@ export function Collections() {
                         />
                         <span>{col.name}</span>
                       </span>
-                      <span className="font-technical-data text-[10px] text-secondary group-hover:text-primary">
+                      <span className="font-technical-data text-technical-data text-secondary group-hover:text-primary">
                         {col.count}
                       </span>
                     </label>
@@ -508,7 +520,7 @@ export function Collections() {
                 className="flex items-center justify-between cursor-pointer select-none"
                 onClick={() => toggleAccordion('case')}
               >
-                <h2 className="font-serif text-body-md font-semibold text-on-surface tracking-wider">
+                <h2 className="font-headline-md text-body-md font-semibold text-on-surface tracking-wider">
                   02 // CASE DIAMETER
                 </h2>
                 <span className="material-symbols-outlined text-secondary text-sm transition-transform duration-200">
@@ -544,7 +556,7 @@ export function Collections() {
                 className="flex items-center justify-between cursor-pointer select-none"
                 onClick={() => toggleAccordion('dial')}
               >
-                <h2 className="font-serif text-body-md font-semibold text-on-surface tracking-wider">
+                <h2 className="font-headline-md text-body-md font-semibold text-on-surface tracking-wider">
                   03 // DIAL FINISH
                 </h2>
                 <span className="material-symbols-outlined text-secondary text-sm transition-transform duration-200">
@@ -583,7 +595,7 @@ export function Collections() {
                 className="flex items-center justify-between cursor-pointer select-none"
                 onClick={() => toggleAccordion('strap')}
               >
-                <h2 className="font-serif text-body-md font-semibold text-on-surface tracking-wider">
+                <h2 className="font-headline-md text-body-md font-semibold text-on-surface tracking-wider">
                   04 // STRAP MATERIAL
                 </h2>
                 <span className="material-symbols-outlined text-secondary text-sm transition-transform duration-200">
@@ -613,7 +625,7 @@ export function Collections() {
             {/* Price Range Slider */}
             <div className="border border-surface-variant bg-surface-container-lowest p-5 space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="font-serif text-body-md font-semibold text-on-surface tracking-wider">
+                <h2 className="font-headline-md text-body-md font-semibold text-on-surface tracking-wider">
                   05 // PRICE RANGE
                 </h2>
                 <span className="font-technical-data text-technical-data text-primary font-bold">
@@ -630,7 +642,7 @@ export function Collections() {
                   onChange={(e) => setMaxPrice(Number(e.target.value))}
                   className="w-full h-1 bg-surface-variant appearance-none cursor-pointer"
                 />
-                <div className="flex justify-between items-center mt-3 font-technical-data text-[10px] text-secondary tracking-widest">
+                <div className="flex justify-between items-center mt-3 font-technical-data text-technical-data text-secondary tracking-widest">
                   <span>₦1.5M</span>
                   <span className="text-primary-container font-semibold">MID: ₦3.5M</span>
                   <span>₦6.0M+</span>
@@ -641,10 +653,10 @@ export function Collections() {
             {/* Quick Assistance Card */}
             <div className="border border-surface-variant/80 bg-surface-container-low p-6 text-center space-y-3">
               <span className="material-symbols-outlined text-primary text-2xl">support_agent</span>
-              <h3 className="font-serif text-body-sm tracking-wider font-semibold text-on-surface">
+              <h3 className="font-headline-md text-body-sm tracking-wider font-semibold text-on-surface">
                 ATELIER CONCIERGE
               </h3>
-              <p className="font-body-sm text-[12px] text-on-surface-variant leading-relaxed">
+              <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
                 Need consultation regarding case proportions, bespoke strap leathers, or private viewing appointments in Lagos or Abuja?
               </p>
               <a
@@ -653,20 +665,20 @@ export function Collections() {
                   e.preventDefault();
                   alert('Thank you for contacting Juwade Concierge. Our atelier representative will reach out shortly.');
                 }}
-                className="inline-block pt-1 font-label-uppercase text-[10px] tracking-widest text-primary hover:text-on-surface border-b border-primary uppercase"
+                className="inline-block pt-1 font-label-uppercase text-label-uppercase tracking-widest text-primary hover:text-on-surface border-b border-primary uppercase"
               >
                 Schedule Consultation
               </a>
             </div>
           </aside>
 
-          {/* PRODUCT MATRIX (9 Columns on Desktop - 3-Column Grid) */}
+          {/* PRODUCT MATRIX (full-width on mobile, 9 Columns on Desktop - 3-Column Grid) */}
           <section aria-label="Product Showcase" className="lg:col-span-9">
             {filteredProducts.length === 0 ? (
               <div className="p-12 text-center bg-surface-container-lowest border border-surface-variant space-y-4">
                 <span className="material-symbols-outlined text-4xl text-secondary">manage_search</span>
-                <h3 className="font-serif text-headline-md text-on-surface">No Timepieces Match Your Filter</h3>
-                <p className="font-body-sm text-secondary">
+                <h3 className="font-headline-md text-headline-md text-on-surface">No Timepieces Match Your Filter</h3>
+                <p className="font-body-sm text-body-sm text-secondary">
                   Try adjusting your case diameter, collection selection, or price slider.
                 </p>
                 <button
@@ -686,10 +698,10 @@ export function Collections() {
                     onClick={() => setSelectedProduct(item)}
                   >
                     <div className="relative w-full aspect-[4/5] bg-[#F6F3F2] overflow-hidden flex items-center justify-center p-8">
-                      <span className="absolute top-3 left-3 font-technical-data text-[10px] tracking-widest text-secondary uppercase z-10">
+                      <span className="absolute top-3 left-3 font-technical-data text-technical-data tracking-widest text-secondary uppercase z-10">
                         {item.edition}
                       </span>
-                      <span className="absolute top-3 right-3 font-technical-data text-[10px] tracking-widest text-primary font-semibold z-10">
+                      <span className="absolute top-3 right-3 font-technical-data text-technical-data tracking-widest text-primary font-semibold z-10">
                         {item.tag}
                       </span>
 
@@ -716,7 +728,7 @@ export function Collections() {
                       {/* Quick Select Overlay Action */}
                       <div className="absolute inset-x-4 bottom-4 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                         <button
-                          className="w-full h-11 bg-on-surface text-surface font-label-uppercase text-[11px] uppercase tracking-widest hover:bg-primary transition-colors flex items-center justify-center space-x-2"
+                          className="w-full h-11 bg-on-surface text-surface font-label-uppercase text-label-uppercase uppercase tracking-widest hover:bg-primary transition-colors flex items-center justify-center space-x-2"
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
@@ -734,18 +746,18 @@ export function Collections() {
                         <p className="font-technical-data text-technical-data text-secondary tracking-widest uppercase">
                           {item.caliber}
                         </p>
-                        <h3 className="font-serif text-body-lg text-on-surface tracking-wider font-semibold uppercase mt-1">
+                        <h3 className="font-headline-md text-body-lg text-on-surface tracking-wider font-semibold uppercase mt-1">
                           {item.title}
                         </h3>
-                        <p className="font-body-sm text-[12px] text-on-surface-variant mt-1">
+                        <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">
                           {item.details}
                         </p>
                       </div>
                       <div className="mt-4 pt-3 border-t border-surface-variant/40 flex items-center justify-between">
-                        <span className="font-body-md font-semibold text-on-surface tracking-wider">
+                        <span className="font-body-md text-body-md font-semibold text-on-surface tracking-wider">
                           {item.priceFormatted}
                         </span>
-                        <span className="font-technical-data text-[10px] text-primary tracking-widest uppercase">
+                        <span className="font-technical-data text-technical-data text-primary tracking-widest uppercase">
                           {item.caseSize}
                         </span>
                       </div>
@@ -792,7 +804,7 @@ export function Collections() {
                   <span className="font-technical-data text-technical-data text-primary block">
                     {selectedProduct.edition} • {selectedProduct.tag}
                   </span>
-                  <h3 className="font-serif text-headline-md text-on-surface uppercase mt-1">
+                  <h3 className="font-headline-md text-headline-md text-on-surface uppercase mt-1">
                     {selectedProduct.title}
                   </h3>
                   <p className="font-technical-data text-technical-data text-secondary mt-1">
@@ -802,7 +814,7 @@ export function Collections() {
                 <p className="font-body-sm text-body-sm text-secondary leading-relaxed">
                   {selectedProduct.desc}
                 </p>
-                <div className="space-y-1 font-technical-data text-[11px] text-on-surface-variant pt-2 border-t border-surface-variant/60">
+                <div className="space-y-1 font-technical-data text-technical-data text-on-surface-variant pt-2 border-t border-surface-variant/60">
                   <div>COLLECTION: <span className="text-on-surface font-semibold">{selectedProduct.collection}</span></div>
                   <div>DIAL FINISH: <span className="text-on-surface font-semibold">{selectedProduct.dialFinish}</span></div>
                   <div>STRAP MATERIAL: <span className="text-on-surface font-semibold">{selectedProduct.strapMaterial}</span></div>
@@ -827,6 +839,92 @@ export function Collections() {
         </div>
       )}
 
+      {/* MOBILE FILTER DRAWER */}
+      {isMobileFilterOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-inverse-surface/60 backdrop-blur-sm flex"
+          onClick={() => setIsMobileFilterOpen(false)}
+        >
+          <div
+            className="ml-auto w-full max-w-sm h-full bg-surface flex flex-col overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Drawer Header */}
+            <div className="flex items-center justify-between p-6 border-b border-surface-variant">
+              <span className="font-headline-md text-body-md font-semibold text-on-surface tracking-wider uppercase">Filters</span>
+              <button
+                type="button"
+                onClick={() => setIsMobileFilterOpen(false)}
+                className="text-on-surface hover:text-primary transition-colors"
+                aria-label="Close filters"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            {/* Filter Content */}
+            <div className="flex-1 p-6 space-y-6">
+              {/* Collection */}
+              <div className="border border-surface-variant bg-surface-container-lowest p-5">
+                <div className="flex items-center justify-between cursor-pointer select-none" onClick={() => toggleAccordion('collection')}>
+                  <h2 className="font-headline-md text-body-md font-semibold text-on-surface tracking-wider">01 // COLLECTION</h2>
+                  <span className="material-symbols-outlined text-secondary text-sm">{openAccordions.collection ? 'remove' : 'add'}</span>
+                </div>
+                {openAccordions.collection && (
+                  <div className="mt-4 space-y-2.5 pt-2 border-t border-surface-variant/50">
+                    {[{ name: 'Klassik Minimal', count: '04' }, { name: 'Chronographe', count: '03' }, { name: 'Bauhaus Automatik', count: '03' }, { name: 'Monolith Series', count: '02' }].map((col) => (
+                      <label key={col.name} className="flex items-center justify-between text-on-surface-variant hover:text-on-surface cursor-pointer font-body-sm text-body-sm group">
+                        <span className="flex items-center space-x-2.5">
+                          <input type="checkbox" checked={selectedCollections.includes(col.name)} onChange={() => handleCollectionChange(col.name)} className="custom-checkbox w-4 h-4" />
+                          <span>{col.name}</span>
+                        </span>
+                        <span className="font-technical-data text-technical-data text-secondary group-hover:text-primary">{col.count}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {/* Case Diameter */}
+              <div className="border border-surface-variant bg-surface-container-lowest p-5">
+                <div className="flex items-center justify-between cursor-pointer select-none" onClick={() => toggleAccordion('case')}>
+                  <h2 className="font-headline-md text-body-md font-semibold text-on-surface tracking-wider">02 // CASE DIAMETER</h2>
+                  <span className="material-symbols-outlined text-secondary text-sm">{openAccordions.case ? 'remove' : 'add'}</span>
+                </div>
+                {openAccordions.case && (
+                  <div className="mt-4 grid grid-cols-2 gap-2 pt-2 border-t border-surface-variant/50">
+                    {['36 MM', '38 MM', '40 MM', '42 MM'].map((size) => (
+                      <button key={size} type="button" onClick={() => handleSizeToggle(size)}
+                        className={`p-2 text-center font-technical-data text-technical-data tracking-widest transition-colors ${selectedSizes.includes(size) ? 'border border-primary bg-primary-container/10 text-primary font-semibold' : 'border border-surface-variant text-on-surface hover:border-primary hover:bg-surface-container-low'}`}>
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {/* Price Range */}
+              <div className="border border-surface-variant bg-surface-container-lowest p-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="font-headline-md text-body-md font-semibold text-on-surface tracking-wider">03 // PRICE RANGE</h2>
+                  <span className="font-technical-data text-technical-data text-primary font-bold">UP TO ₦{(maxPrice / 1000000).toFixed(2)}M</span>
+                </div>
+                <input type="range" min={1500000} max={6000000} step={250000} value={maxPrice}
+                  onChange={(e) => setMaxPrice(Number(e.target.value))}
+                  className="w-full h-1 bg-surface-variant appearance-none cursor-pointer" />
+              </div>
+            </div>
+            {/* Drawer Footer */}
+            <div className="p-6 border-t border-surface-variant">
+              <button
+                type="button"
+                onClick={() => { setIsMobileFilterOpen(false); }}
+                className="w-full h-12 bg-on-surface text-surface font-label-uppercase text-label-uppercase tracking-widest uppercase hover:bg-primary transition-colors"
+              >
+                Apply Filters ({filteredProducts.length} Results)
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* MINIMAL FOOTER */}
       <footer className="w-full bg-surface-container-low dark:bg-inverse-surface border-t border-surface-variant dark:border-outline-variant/20 transition-all duration-200 ease-in-out">
         <div className="w-full px-margin md:px-margin-desktop py-space-xl max-w-7xl mx-auto">
@@ -834,7 +932,7 @@ export function Collections() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter-desktop mb-space-xl">
             {/* Col 1: Brand & Ethos */}
             <div className="space-y-4 md:col-span-1">
-              <div className="font-serif text-headline-md text-on-surface dark:text-inverse-on-surface tracking-widest uppercase">
+              <div className="font-display-hero text-headline-md text-on-surface dark:text-inverse-on-surface tracking-widest uppercase">
                 JUWADE
               </div>
               <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant leading-relaxed">
