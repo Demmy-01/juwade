@@ -536,17 +536,17 @@ export function Collections() {
                     className="group relative bg-surface-container-lowest border border-surface-variant hover:border-primary-container transition-all duration-300 flex flex-col justify-between cursor-pointer"
                     onClick={() => setSelectedProduct(item)}
                   >
-                    <div className="relative w-full aspect-[4/5] bg-[#F6F3F2] overflow-hidden flex items-center justify-center p-8">
-                      <span className="absolute top-3 left-3 font-technical-data text-technical-data tracking-widest text-secondary uppercase z-10">
+                    <div className="relative w-full aspect-[4/5] bg-[#F6F3F2] overflow-hidden flex items-center justify-center">
+                      <span className="absolute top-3 left-3 font-technical-data text-technical-data tracking-widest text-secondary uppercase z-10 bg-surface-container-lowest/80 px-2 py-0.5 backdrop-blur-sm">
                         {item.edition}
                       </span>
-                      <span className="absolute top-3 right-3 font-technical-data text-technical-data tracking-widest text-primary font-semibold z-10">
+                      <span className="absolute top-3 right-3 font-technical-data text-technical-data tracking-widest text-primary font-semibold z-10 bg-surface-container-lowest/80 px-2 py-0.5 backdrop-blur-sm">
                         {item.tag}
                       </span>
 
                       {/* Primary Watch Image */}
                       <img
-                        className="w-full h-full object-contain transition-opacity duration-500 group-hover:opacity-0 scale-95 group-hover:scale-100"
+                        className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0 group-hover:scale-105"
                         src={item.img1}
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = '/timepiece.png';
@@ -556,7 +556,7 @@ export function Collections() {
 
                       {/* Secondary Hover Angle Image */}
                       <img
-                        className="w-full h-full object-contain absolute inset-0 p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-95 group-hover:scale-100"
+                        className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
                         src={item.img2}
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = '/caliber.png';
@@ -633,14 +633,14 @@ export function Collections() {
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-space-lg items-center">
-              <div className="w-full aspect-square bg-surface-container-low border border-surface-variant overflow-hidden p-4 flex items-center justify-center">
+              <div className="w-full aspect-square bg-surface-container-low border border-surface-variant overflow-hidden flex items-center justify-center">
                 <img
                   src={selectedProduct.img1}
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/timepiece.png';
                   }}
                   alt={selectedProduct.title}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="space-y-4">
