@@ -289,56 +289,156 @@ export function Navbar() {
         </div>
       )}
 
-      {/* Slide-out Mobile Navigation Drawer */}
+      {/* Slide-out Mobile Navigation Drawer — Full Premium Panel */}
       {isMobileMenuOpen && (
-        <div className="drawer-backdrop" onClick={() => setIsMobileMenuOpen(false)}>
-          <div className="drawer-panel" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '320px' }}>
-            <div
-              style={{
-                padding: 'var(--space-lg)',
-                borderBottom: '1px solid var(--surface-container-highest)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <span className="brand-logo-text" style={{ fontSize: '1.25rem' }}>
+        <div
+          className="drawer-backdrop"
+          onClick={() => setIsMobileMenuOpen(false)}
+          style={{ justifyContent: 'flex-start' }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: '100%',
+              maxWidth: '340px',
+              height: '100%',
+              backgroundColor: 'var(--surface)',
+              display: 'flex',
+              flexDirection: 'column',
+              borderRight: '1px solid var(--surface-container-highest)',
+              boxShadow: '12px 0 40px rgba(0,0,0,0.06)',
+            }}
+          >
+            {/* Panel Header */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '1.25rem 1.5rem',
+              borderBottom: '1px solid var(--surface-container-highest)',
+            }}>
+              <Link
+                to="/"
+                className="brand-logo-text"
+                style={{ fontSize: '1.125rem', letterSpacing: '0.3em' }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 JUWADE
-              </span>
-              <button type="button" className="utility-icon-btn" onClick={() => setIsMobileMenuOpen(false)}>
+              </Link>
+              <button
+                type="button"
+                className="utility-icon-btn"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
                 <X size={20} />
               </button>
             </div>
 
-            <div style={{ flex: 1, padding: 'var(--space-lg)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                {navLinks.map((item) => {
-                  const isActive = location.pathname === item.path || (item.path === '/' && location.pathname === '/');
-                  return (
-                    <Link
-                      key={item.label}
-                      to={item.path}
-                      className={`nav-link-item ${isActive ? 'nav-link-active' : ''}`}
-                      style={{ fontSize: '0.9375rem', paddingBottom: '8px' }}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </div>
+            {/* Label */}
+            <div style={{ padding: '1.5rem 1.5rem 0.75rem' }}>
+              <p className="technical-data" style={{ color: 'var(--color-titanium)', letterSpacing: '0.2em' }}>
+                NAVIGATE
+              </p>
+            </div>
 
-              <div style={{ marginTop: 'auto', paddingTop: 'var(--space-lg)', borderTop: '1px solid var(--surface-container-highest)' }}>
-                <p className="technical-data" style={{ color: 'var(--color-titanium)', marginBottom: '0.5rem' }}>
-                  CURRENCY & REGION
-                </p>
-                <div className="label-uppercase" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-                  NGN (₦) — NIGERIA
-                </div>
-                <p className="body-sm" style={{ color: 'var(--color-titanium)', marginTop: '0.75rem' }}>
-                  Lagos Atelier • Victoria Island
-                </p>
-              </div>
+            {/* Primary Nav Links */}
+            <nav style={{ flex: 1, padding: '0 0.75rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+              {navLinks.map((item) => {
+                const isActive = location.pathname === item.path || (item.path === '/' && location.pathname === '/');
+                return (
+                  <Link
+                    key={item.label}
+                    to={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '1rem 0.75rem',
+                      borderRadius: '0',
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.375rem',
+                      fontWeight: 400,
+                      letterSpacing: '0.06em',
+                      color: isActive ? 'var(--primary)' : 'var(--on-surface)',
+                      textDecoration: 'none',
+                      borderBottom: '1px solid var(--surface-container-low)',
+                      transition: 'color 0.2s ease, background-color 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--surface-container-low)';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    <span>{item.label}</span>
+                    <span
+                      className="material-symbols-outlined"
+                      style={{ fontSize: '1rem', opacity: isActive ? 1 : 0.3 }}
+                    >
+                      arrow_forward
+                    </span>
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* Quick Utility Icons Row */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+              padding: '1.25rem 1.5rem',
+              borderTop: '1px solid var(--surface-container-highest)',
+              borderBottom: '1px solid var(--surface-container-highest)',
+            }}>
+              <button
+                type="button"
+                className="utility-icon-btn"
+                onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
+                aria-label="Search"
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.35rem', padding: '0.5rem 1rem' }}
+              >
+                <Search size={20} strokeWidth={1.5} />
+                <span className="technical-data" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--color-titanium)' }}>SEARCH</span>
+              </button>
+              <div style={{ width: '1px', height: '2.5rem', backgroundColor: 'var(--surface-container-highest)' }} />
+              <button
+                type="button"
+                className="utility-icon-btn"
+                onClick={() => { setIsMobileMenuOpen(false); setIsWishlistOpen(true); }}
+                aria-label="Wishlist"
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.35rem', padding: '0.5rem 1rem' }}
+              >
+                <Heart size={20} strokeWidth={1.5} />
+                <span className="technical-data" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--color-titanium)' }}>WISHLIST</span>
+              </button>
+              <div style={{ width: '1px', height: '2.5rem', backgroundColor: 'var(--surface-container-highest)' }} />
+              <button
+                type="button"
+                className="utility-icon-btn"
+                onClick={() => { setIsMobileMenuOpen(false); setIsCartOpen(true); }}
+                aria-label="Cart"
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.35rem', padding: '0.5rem 1rem' }}
+              >
+                <ShoppingBag size={20} strokeWidth={1.5} />
+                <span className="technical-data" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--color-titanium)' }}>CART</span>
+              </button>
+            </div>
+
+            {/* Atelier Footer Strip */}
+            <div style={{ padding: '1.25rem 1.5rem' }}>
+              <p className="technical-data" style={{ color: 'var(--color-titanium)', letterSpacing: '0.18em', marginBottom: '0.35rem' }}>
+                REGION & CURRENCY
+              </p>
+              <p className="label-uppercase" style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.7rem', letterSpacing: '0.2em' }}>
+                NGN (₦) — NIGERIA
+              </p>
+              <p className="body-sm" style={{ color: 'var(--color-titanium)', marginTop: '0.5rem', fontSize: '0.75rem' }}>
+                Lagos Atelier · Victoria Island
+              </p>
             </div>
           </div>
         </div>
