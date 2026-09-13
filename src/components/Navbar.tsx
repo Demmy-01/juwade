@@ -65,7 +65,7 @@ export function Navbar() {
         {/* Right: Utilities */}
         <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
           {/* Currency / Language Selector */}
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative' }} className="desktop-only-currency">
             <button
               type="button"
               onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}
@@ -428,15 +428,65 @@ export function Navbar() {
               </button>
             </div>
 
-            {/* Atelier Footer Strip */}
-            <div style={{ padding: '1.25rem 1.5rem' }}>
-              <p className="technical-data" style={{ color: 'var(--color-titanium)', letterSpacing: '0.18em', marginBottom: '0.35rem' }}>
-                REGION & CURRENCY
+            {/* Atelier & Region & Language Footer Strip */}
+            <div style={{ padding: '1.25rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              <p className="technical-data" style={{ color: 'var(--color-titanium)', letterSpacing: '0.18em', margin: 0 }}>
+                CURRENCY & LANGUAGE
               </p>
-              <p className="label-uppercase" style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.7rem', letterSpacing: '0.2em' }}>
-                NGN (₦) — NIGERIA
-              </p>
-              <p className="body-sm" style={{ color: 'var(--color-titanium)', marginTop: '0.5rem', fontSize: '0.75rem' }}>
+
+              {/* Currency Selector */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span className="technical-data" style={{ fontSize: '0.65rem', color: 'var(--color-titanium)' }}>CURRENCY</span>
+                <div style={{ display: 'flex', gap: '0.4rem' }}>
+                  {currencies.map((curr) => (
+                    <button
+                      key={curr}
+                      type="button"
+                      onClick={() => setCurrency(curr)}
+                      className="label-uppercase"
+                      style={{
+                        padding: '4px 10px',
+                        border: currency === curr ? '1px solid var(--primary)' : '1px solid var(--surface-container-highest)',
+                        backgroundColor: currency === curr ? 'var(--surface-container-low)' : 'transparent',
+                        color: currency === curr ? 'var(--primary)' : 'var(--on-surface)',
+                        fontSize: '0.7rem',
+                        fontWeight: currency === curr ? 600 : 400,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {curr} (₦)
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Language Selector */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span className="technical-data" style={{ fontSize: '0.65rem', color: 'var(--color-titanium)' }}>LANGUAGE</span>
+                <div style={{ display: 'flex', gap: '0.35rem' }}>
+                  {languages.map((lang) => (
+                    <button
+                      key={lang}
+                      type="button"
+                      onClick={() => setLanguage(lang)}
+                      className="label-uppercase"
+                      style={{
+                        padding: '4px 8px',
+                        border: language === lang ? '1px solid var(--primary)' : '1px solid var(--surface-container-highest)',
+                        backgroundColor: language === lang ? 'var(--surface-container-low)' : 'transparent',
+                        color: language === lang ? 'var(--primary)' : 'var(--on-surface)',
+                        fontSize: '0.7rem',
+                        fontWeight: language === lang ? 600 : 400,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <p className="body-sm" style={{ color: 'var(--color-titanium)', marginTop: '0.25rem', fontSize: '0.75rem' }}>
                 Lagos Atelier · Victoria Island
               </p>
             </div>

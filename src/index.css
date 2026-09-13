@@ -461,7 +461,8 @@ button, input, textarea, select {
 }
 
 @media (max-width: 860px) {
-  .desktop-only-nav {
+  .desktop-only-nav,
+  .desktop-only-currency {
     display: none !important;
   }
   .mobile-only-toggle {
